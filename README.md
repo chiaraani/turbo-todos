@@ -1,4 +1,9 @@
 # Turbo todos
+
+
+https://user-images.githubusercontent.com/13300465/187301261-b0840f9a-368d-46ab-aed9-709ca3deac7f.mp4
+
+
 ## Description
 A demonstration of turbo rails with todos
 
