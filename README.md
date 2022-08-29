@@ -1,24 +1,17 @@
-# README
+# Turbo todos
+## Description
+A demonstration of turbo rails with todos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Run on your computer
 
-Things you may want to cover:
+Ruby version 3.1
 
-* Ruby version
+```
+git clone git@github.com:chiaraani/turbo-todos.git
+cd turbo-todos
+rails db:create
+rails db:migrate
+rails s
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Visit on http://localhost:3000/
