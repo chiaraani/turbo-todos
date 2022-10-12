@@ -6,15 +6,6 @@ class TodosController < ApplicationController
     @todos = Todo.in_order_of(:status, %w[incomplete complete])
   end
 
-  # GET /todos/1 or /todos/1.json
-  def show
-  end
-
-  # GET /todos/new
-  def new
-    @todo = Todo.new
-  end
-
   # GET /todos/1/edit
   def edit
   end
@@ -29,7 +20,16 @@ class TodosController < ApplicationController
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
         format.json { render :show, status: :created, location: @todo }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("#{helpers.dom_id(@todo)}_form", partial: "form", locals: { todo: @todo }) }
+        format.turbo_stream do
+          render(
+            turbo_stream: turbo_stream.replace(
+              "#{helpers.dom_id(@todo)}_form", 
+              partial: "form", 
+              locals: { todo: @todo }
+            )
+          )
+        end
+
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
