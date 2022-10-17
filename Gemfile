@@ -59,6 +59,7 @@ group :development, :test do
   # Testing framework
   gem "rspec-rails"
   gem "guard-rspec"
+  gem "shoulda-matchers"
 
   # Fixtures
   gem "factory_bot_rails"
