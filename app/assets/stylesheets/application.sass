@@ -36,6 +36,8 @@ main
 .complete 
   text-decoration: line-through
 
+// Forms //
+
 form 
   display: contents
 
@@ -49,6 +51,11 @@ input[type=text]
   border-color: grey
   border-style: solid
 
+@mixin button-background($color)
+  background-image: linear-gradient(0deg, darken($color, 20%), $color)
+  &:hover 
+    background-image: linear-gradient(0deg, $color, lighten($color, 10%))
+
 .button 
   color: white
   border-style: none
@@ -56,18 +63,15 @@ input[type=text]
   text-decoration: none
   display: flex
   align-items: center
-  // Background
-  background-image: linear-gradient(0deg, #3658bf, #4e7aff)
-  &:hover 
-    background-image: linear-gradient(0deg, #4068e1, #6c90ff)
+  @include button-background(#4e7aff)
 
 .red 
-  background-image: linear-gradient(0deg, #bf0505, #f50c0c)
-  &:hover 
-    background-image: linear-gradient(0deg, #dd0707, #ff2e2e)
+  @include button-background(#ff4949)
 
 input[type=submit], button
   @extend .button
+
+// Errors //
 
 .error 
   background-color: #f50c0c
