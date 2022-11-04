@@ -14,7 +14,7 @@ RSpec.describe "todos/index", type: :view do
     )
 
     assert_select "turbo-cable-stream-source"
-    assert_select "ul#todos > li[id^=todo]", times: 5
+    assert_select "#todos > [id^=todo]", times: 5
     expect(view).to have_received(:render).with(todos)
   end
 end

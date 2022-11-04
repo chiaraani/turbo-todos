@@ -5,7 +5,7 @@ RSpec.describe "todos/_todo", type: :view do
     todo = create(:todo)
     render partial: "todos/todo", locals: { todo: }
 
-    assert_select "li#todo_#{todo.id}_item > turbo-frame#todo_#{todo.id}", 
+    assert_select "#todo_#{todo.id}_item > turbo-frame#todo_#{todo.id}", 
       text: /#{todo.title}/ do
 
       switch = todo.status == "complete" ? "incomplete" : "complete"

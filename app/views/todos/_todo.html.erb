@@ -1,18 +1,18 @@
-<li id="<%= "#{dom_id(todo)}_item" %>" class="py-3">
+<div id="<%= "#{dom_id(todo)}_item" %>">
   <%= turbo_frame_tag dom_id(todo) do %>
-    <div class="flex items-center justify-between">
-      <%= link_to todo.title, edit_todo_path(todo), class: "flex-1 #{"line-through opacity-50" if todo.complete?}" %>
+    <div class="todo">
+      <span <%= 'class=complete' if todo.complete? %>>
+         <%= todo.title %>
+      </span>
 
-      <div class="flex items-center space-x-3">
-        <% if todo.complete? %>
-          <%= button_to "Mark incomplete", todo_path(todo, todo: { status: 'incomplete'}), method: :patch, class: "bg-neutral-50 px-3 py-2 rounded inline-flex items-center justify-center text-neutral-600" %>
-        <% else %>
-          <%= button_to "Mark complete", todo_path(todo, todo: { status: 'complete'}), method: :patch, class: "bg-green-50 px-3 py-2 rounded inline-flex items-center justify-center text-green-600" %>
-        <% end %>
+      <% if todo.complete? %>
+        <%= button_to "Mark incomplete", todo_path(todo, todo: { status: 'incomplete'}), method: :patch, class: "red button" %>
+      <% else %>
+        <%= button_to "Mark complete", todo_path(todo, todo: { status: 'complete'}), method: :patch, class: "button" %>
+      <% end %>
 
-        <%= link_to "Edit", edit_todo_path(todo), class: "bg-blue-50 px-3 py-2 rounded inline-flex items-center justify-center text-blue-600" %>
-        <%= button_to "Delete", todo_path(todo), method: :delete, class: "bg-red-50 px-3 py-2 rounded inline-flex items-center justify-center text-red-600" %>
-      </div>
+      <%= link_to "Edit", edit_todo_path(todo), class: "button" %>
+      <%= button_to "Delete", todo_path(todo), method: :delete, class: "red button" %>
     </div>
   <% end %>
-</li>
+</div>
