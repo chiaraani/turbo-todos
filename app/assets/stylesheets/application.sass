@@ -14,11 +14,13 @@
  *= require_self
  */
 
-$small-breakpoint: 500px
+$small-breakpoint: 425px
 
 body 
   font-family: sans-serif
   font-size: 1.2rem
+  @media (max-width: $small-breakpoint)
+    font-size: 1rem
 
 main 
   max-width: 800px
@@ -34,11 +36,15 @@ main
   display: grid
   grid-template-columns: 1fr auto auto auto auto
   align-items: center
+  & .title
+    font-size: 1.2em
+    margin: 0.7em
   @media (max-width: $small-breakpoint)
     display: flex
-    flex-direction: column
+    flex-direction: row
+    flex-wrap: wrap
 
-.complete 
+.complete.todo .title
   text-decoration: line-through
 
 // Forms //
