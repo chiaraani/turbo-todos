@@ -70,6 +70,7 @@ input[type=text]
     background-image: linear-gradient(0deg, $color, lighten($color, 10%))
 
 .button 
+  cursor: pointer
   color: white
   border-style: none
   padding: 0.5em 1em
@@ -78,9 +79,10 @@ input[type=text]
   align-items: center
   width: fit-content
   @include button-background(#4e7aff)
-
-.red 
-  @include button-background(#ff4949)
+  &.red
+    @include button-background(#ff4949)
+  &.green
+    @include button-background(#20ef13)
 
 input[type=submit], button
   @extend .button
