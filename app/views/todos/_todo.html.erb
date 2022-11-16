@@ -8,7 +8,7 @@
       <% if todo.complete? %>
         <%= button_to "Mark incomplete", todo_path(todo, todo: { status: 'incomplete'}), method: :patch, class: "red button" %>
       <% else %>
-        <%= button_to "Mark complete", todo_path(todo, todo: { status: 'complete'}), method: :patch, class: "button" %>
+        <%= button_to "Mark complete", todo_path(todo, todo: { status: 'complete'}), method: :patch, class: "green button" %>
       <% end %>
 
       <%= link_to "Edit", edit_todo_path(todo), class: "button" %>
