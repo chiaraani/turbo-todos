@@ -43,9 +43,11 @@ main
     display: flex
     flex-direction: row
     flex-wrap: wrap
-
-.complete.todo .title
-  text-decoration: line-through
+  &.complete 
+    background-color: white
+    opacity: 0.5
+    & .title
+      text-decoration: line-through
 
 // Forms //
 
@@ -83,6 +85,8 @@ input[type=text]
     @include button-background(#ff4949)
   &.green
     @include button-background(#20ef13)
+  &.grey
+    @include button-background(grey)
 
 input[type=submit], button
   @extend .button
