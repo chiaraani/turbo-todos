@@ -75,6 +75,11 @@ class TodosController < ApplicationController
     end
 
     def reload_todos
-      Turbo::StreamsChannel.broadcast_replace_to('todos', target: 'todos', partial: "todos/todos")
+      Turbo::StreamsChannel.broadcast_replace_to(
+        'todos', 
+        target: 'todos', 
+        partial: "todos/todos",
+        locals: { todos: Todo.all }
+      )
     end
 end
