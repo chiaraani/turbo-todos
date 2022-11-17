@@ -68,6 +68,20 @@ RSpec.describe "Todos", type: :system do
 
       expect(page).to have_content('Title can\'t be blank')
     end
+
+    scenario 'Cancelling editing todo' do
+      todo = create :todo, title: 'Task'
+
+      visit root_path
+      todo_tag = find("#todo_#{todo.id}_item")
+
+      todo_tag.click_on 'Edit'
+      todo_tag.fill_in(with: 'Task 1')
+      todo_tag.click_on 'Cancel'
+
+      expect(todo_tag.find('.title')).to have_text 'Task'
+      expect(todo_tag.find('.title')).to_not have_text 'Task 1'
+    end
   end
 
   scenario 'Ordering todos by status' do
