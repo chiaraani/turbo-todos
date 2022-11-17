@@ -20,7 +20,6 @@ RSpec.describe "Todos", type: :system do
     expect(find(':not(.complete).todo > .title')).to have_style('text-decoration' => /none/)
 
     click_on 'Mark complete'
-
     expect(find('.complete.todo > .title')).to have_style('text-decoration' => /line-through/)
   end
 
@@ -31,7 +30,6 @@ RSpec.describe "Todos", type: :system do
     expect(find('.complete.todo > .title')).to have_style('text-decoration' => /line-through/)
 
     click_on 'Mark incomplete'
-
     expect(find(':not(.complete).todo > .title')).to have_style('text-decoration' => /none/)
   end
 
@@ -40,11 +38,22 @@ RSpec.describe "Todos", type: :system do
     todo2 = create :todo, title: 'Todo 2', status: :incomplete
 
     visit root_path
-
     expect(page).to have_text(/#{todo2.title}.+#{todo1.title}/m)
 
     click_on 'Mark complete'
-
     expect(page).to have_text(/#{todo1.title}.+#{todo2.title}/m)
+  end
+
+  scenario 'Editing todo' do
+    todo = create :todo, title: 'Task'
+
+    visit root_path
+    todo_tag = find("#todo_#{todo.id}_item")
+
+    todo_tag.click_on 'Edit'
+    todo_tag.fill_in(with: 'Task 1')
+    todo_tag.click_on 'Update Todo'
+
+    expect(todo_tag.find('.title')).to have_text 'Task 1'
   end
 end
