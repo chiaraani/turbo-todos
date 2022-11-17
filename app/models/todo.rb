@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Todo < ApplicationRecord
   enum status: { incomplete: 0, complete: 1 }
 
