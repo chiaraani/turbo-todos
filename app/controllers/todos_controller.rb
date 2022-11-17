@@ -17,6 +17,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.save
         format.turbo_stream
+        reload_todos
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
         format.json { render :show, status: :created, location: @todo }
       else
@@ -40,6 +41,7 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
+        reload_todos
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully updated." }
         format.json { render :show, status: :ok, location: @todo }
       else
@@ -70,5 +72,9 @@ class TodosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def todo_params
       params.require(:todo).permit(:title, :status)
+    end
+
+    def reload_todos
+      Turbo::StreamsChannel.broadcast_replace_to('todos', target: 'todos', partial: "todos/todos")
     end
 end
