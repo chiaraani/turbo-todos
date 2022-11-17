@@ -86,14 +86,19 @@ RSpec.describe 'Todos' do
     end
   end
 
-  it 'Ordering todos by status' do
-    todo1 = create(:todo, title: 'Todo 1', status: :complete)
-    todo2 = create(:todo, title: 'Todo 2', status: :incomplete)
+  describe 'ordering without reloading' do
+    let!(:todo1) { create(:todo, title: 'Todo 1', status: :complete) }
+    let!(:todo2) { create(:todo, title: 'Todo 2', status: :incomplete) }
 
-    visit root_path
-    expect(page).to have_text(/#{todo2.title}.+#{todo1.title}/m)
+    before { visit root_path }
 
-    click_on 'Mark complete'
-    expect(page).to have_text(/#{todo1.title}.+#{todo2.title}/m)
+    it 'Ordering todos by status' do
+      expect(page).to have_text(/#{todo2.title}.+#{todo1.title}/m)
+    end
+
+    it 'Ordering secondarily by id' do
+      click_on 'Mark complete'
+      expect(page).to have_text(/#{todo1.title}.+#{todo2.title}/m)
+    end
   end
 end

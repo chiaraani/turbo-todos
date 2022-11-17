@@ -9,10 +9,13 @@ Metrics/BlockLength:
   Exclude: [Guardfile]
 
 Style/Documentation:
-  Exclude: [config/application.rb]
+  Exclude: 
+    - config/application.rb
+    - db/migrate
 
 Layout/ArgumentAlignment: 
   Enabled: false
 
 Lint/UselessAssignment:
   Enabled: false
+

@@ -36,11 +36,9 @@ RSpec.describe 'todos/_todo' do
   end
 
   it 'renders button "Delete"' do
-    assert_select turbo_frame do
-      assert_select 'form[action=?]', todo_path(todo) do
-        assert_select 'input[value=delete]'
-        assert_select 'button', text: 'Delete'
-      end
+    assert_select "#{turbo_frame} form[action=?]", todo_path(todo) do
+      assert_select 'input[value=delete]'
+      assert_select 'button', text: 'Delete'
     end
   end
 end
