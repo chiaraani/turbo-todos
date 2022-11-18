@@ -18,11 +18,9 @@ RSpec.describe 'todos/_todo' do
     let(:form) { "form[action='#{todo_path(todo, todo: { status: opposite })}']" }
 
     it "renders button 'Mark #{opposite}" do
-      assert_select turbo_frame do
-        assert_select form do
-          assert_select 'input[value=patch]'
-          assert_select 'button', text: "Mark #{opposite}"
-        end
+      assert_select "#{turbo_frame} #{form}" do
+        assert_select 'input[value=patch]'
+        assert_select 'button', text: "Mark #{opposite}"
       end
     end
   end
