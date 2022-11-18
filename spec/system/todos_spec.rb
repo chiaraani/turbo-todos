@@ -6,14 +6,20 @@ RSpec.describe 'Todos' do
   describe '#create' do
     before { visit root_path }
 
-    it 'Creating todo' do
-      fill_in(placeholder: /Add/, with: 'Do chores')
-      click_on 'Create Todo'
+    context 'when successful' do
+      before do
+        fill_in(placeholder: /Add/, with: 'Do chores')
+        click_on 'Create Todo'
+      end
 
-      expect(page).to have_content('Do chores')
-      expect(page).to have_button('Mark complete')
-      expect(page).to have_link('Edit')
-      expect(page).to have_button('Delete')
+      it('displays title') { expect(page).to have_content('Do chores') }
+
+      it 'displays button "Mark complete"' do
+        expect(page).to have_button('Mark complete')
+      end
+
+      it('displays link "Edit"') { expect(page).to have_link('Edit') }
+      it('diplays button "Delete"') { expect(page).to have_button('Delete') }
     end
 
     it 'Failing to create todo with empty title' do
