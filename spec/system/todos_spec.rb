@@ -25,32 +25,29 @@ RSpec.describe 'Todos' do
   end
 
   describe '#update' do
-    it 'Marking todo complete' do
-      create(:todo, status: :incomplete)
+    let(:status) { 'incomplete' }
+    let!(:todo) { create(:todo, title: 'Task', status:) }
+    let(:todo_tag) { find("#todo_#{todo.id}_item") }
 
-      visit root_path
-      expect(find(':not(.complete).todo > .title')).to have_style('text-decoration' => /none/)
+    before { visit root_path }
 
-      click_on 'Mark complete'
-      expect(find('.complete.todo > .title')).to have_style('text-decoration' => /line-through/)
+    context 'when incomplete' do
+      it 'marks todo complete' do
+        click_on 'Mark complete'
+        expect(find('.complete.todo > .title')).to have_style('text-decoration' => /line-through/)
+      end
     end
 
-    it 'Marking todo incomplete' do
-      create(:todo, status: :complete)
+    context 'when complete' do
+      let(:status) { 'complete' }
 
-      visit root_path
-      expect(find('.complete.todo > .title')).to have_style('text-decoration' => /line-through/)
-
-      click_on 'Mark incomplete'
-      expect(find(':not(.complete).todo > .title')).to have_style('text-decoration' => /none/)
+      it 'marks todo incomplete' do
+        click_on 'Mark incomplete'
+        expect(find(':not(.complete).todo > .title')).to have_style('text-decoration' => /none/)
+      end
     end
 
     it 'Updating todo successfully' do
-      todo = create(:todo, title: 'Task')
-
-      visit root_path
-      todo_tag = find("#todo_#{todo.id}_item")
-
       todo_tag.click_on 'Edit'
       todo_tag.fill_in(with: 'Task 1')
       todo_tag.click_on 'Update Todo'
@@ -59,11 +56,6 @@ RSpec.describe 'Todos' do
     end
 
     it 'Failing to update todo with empty title' do
-      todo = create(:todo, title: 'Task')
-
-      visit root_path
-      todo_tag = find("#todo_#{todo.id}_item")
-
       todo_tag.click_on 'Edit'
       todo_tag.fill_in(with: ' ')
       todo_tag.click_on 'Update Todo'
@@ -72,16 +64,10 @@ RSpec.describe 'Todos' do
     end
 
     it 'Cancelling editing todo' do
-      todo = create(:todo, title: 'Task')
-
-      visit root_path
-      todo_tag = find("#todo_#{todo.id}_item")
-
       todo_tag.click_on 'Edit'
       todo_tag.fill_in(with: 'Task 1')
       todo_tag.click_on 'Cancel'
 
-      expect(todo_tag.find('.title')).to have_text 'Task'
       expect(todo_tag.find('.title')).not_to have_text 'Task 1'
     end
   end
