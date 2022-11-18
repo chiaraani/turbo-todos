@@ -11,7 +11,7 @@ Metrics/BlockLength:
 Style/Documentation:
   Exclude: 
     - config/application.rb
-    - db/migrate
+    - db/migrate/*
 
 Layout/ArgumentAlignment: 
   Enabled: false

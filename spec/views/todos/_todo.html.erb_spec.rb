@@ -27,9 +27,9 @@ RSpec.describe 'todos/_todo' do
     end
   end
 
-  context('incomplete') { include_examples 'Mark', 'incomplete' }
+  context('when incomplete') { include_examples 'Mark', 'incomplete' }
 
-  context('complete') { include_examples 'Mark', 'complete' }
+  context('when complete') { include_examples 'Mark', 'complete' }
 
   it 'renders button "Edit"' do
     assert_select "#{turbo_frame} a[href=?]", edit_todo_path(todo), 'Edit'
