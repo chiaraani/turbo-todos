@@ -4,6 +4,10 @@ require 'rails_helper'
 
 RSpec.describe TodosController do
   describe 'routing' do
+    it 'routes to #index via root' do
+      expect(get: '/').to route_to('todos#index')
+    end
+
     it 'routes to #index' do
       expect(get: '/todos').to route_to('todos#index')
     end
