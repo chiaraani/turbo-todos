@@ -8,7 +8,7 @@
   <div class="todo">
     <%= form.text_field :title, placeholder: "Add a new todo", 'aria-label': 'Title' %>
     <%= form.submit %>
-    <%= link_to 'Cancel', todo, class: 'red button' if todo.id %>
+    <%= link_to 'Cancel', Todo, class: 'red button' if todo.id %>
 </div>
 
 <% end %>

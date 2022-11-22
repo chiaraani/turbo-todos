@@ -40,7 +40,7 @@ RSpec.describe 'Todos' do
     context 'when incomplete' do
       it 'marks todo complete' do
         click_on 'Mark complete'
-        expect(find('.complete.todo > .title')).to have_style('text-decoration' => /line-through/)
+        expect(find('.complete.todo > .title')).to match_style('text-decoration' => /line-through/)
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe 'Todos' do
 
       it 'marks todo incomplete' do
         click_on 'Mark incomplete'
-        expect(find(':not(.complete).todo > .title')).to have_style('text-decoration' => /none/)
+        expect(find(':not(.complete).todo > .title')).to match_style('text-decoration' => /none/)
       end
     end
 

@@ -34,14 +34,6 @@ RSpec.describe '/todos' do
     end
   end
 
-  describe 'GET /edit' do
-    it 'renders a successful response' do
-      todo = Todo.create! valid_attributes
-      get edit_todo_url(todo)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new Todo' do
@@ -52,7 +44,7 @@ RSpec.describe '/todos' do
 
       it 'redirects to the created todo' do
         post todos_url, params: { todo: valid_attributes }
-        expect(response).to redirect_to(todo_url(Todo.last))
+        expect(response).to redirect_to(todos_url)
       end
     end
 
@@ -88,7 +80,7 @@ RSpec.describe '/todos' do
         todo = Todo.create! valid_attributes
         patch todo_url(todo), params: { todo: new_attributes }
         todo.reload
-        expect(response).to redirect_to(todo_url(todo))
+        expect(response).to redirect_to(todos_url)
       end
     end
 

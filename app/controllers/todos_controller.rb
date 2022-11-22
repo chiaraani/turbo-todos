@@ -8,9 +8,6 @@ class TodosController < ApplicationController
     @todos = Todo.all
   end
 
-  # GET /todos/1/edit
-  def edit; end
-
   # POST /todos or /todos.json
   def create
     @todo = Todo.new(todo_params)
@@ -19,8 +16,8 @@ class TodosController < ApplicationController
       if @todo.save
         format.turbo_stream
         reload_todos
-        format.html { redirect_to todo_url(@todo), notice: 'Todo was successfully created.' }
-        format.json { render :show, status: :created, location: @todo }
+
+        format.html { redirect_to Todo, notice: 'Todo was successfully created.' }
       else
         format.turbo_stream do
           render(
@@ -33,7 +30,6 @@ class TodosController < ApplicationController
         end
 
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,15 +39,13 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.update(todo_params)
         reload_todos
-        format.html { redirect_to todo_url(@todo), notice: 'Todo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @todo }
+        format.html { redirect_to todos_url, notice: 'Todo was successfully updated.' }
       else
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace("#{helpers.dom_id(@todo)}_form", partial: 'form',
                                                                                      locals: { todo: @todo })
         end
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,7 +57,6 @@ class TodosController < ApplicationController
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove("#{helpers.dom_id(@todo)}_item") }
       format.html { redirect_to todos_url, notice: 'Todo was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
